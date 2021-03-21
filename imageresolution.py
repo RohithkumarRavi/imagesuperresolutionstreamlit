@@ -91,6 +91,6 @@ if uploaded_file is not None:
     if st.button('Upscale Now'):
         st.write("upscaling...")
         gen_image1 = resolve_single(generator, np.array(image)).numpy()
-        bicubic = image.resize(gen_image1.shape)
+        bicubic = image.resize((image.size[0]), image.size[1]))
         st.image(bicubic, caption='Normal upscaled image')
         st.image(gen_image1, caption='Upscaled Image')
