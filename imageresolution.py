@@ -85,12 +85,13 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     if image.size[0] > 224 or image.size[1] > 224:
         st.write("Image has been downscaled to 224 x 224")
-    image = image.resize((224,224))
+        image = image.resize((224,224))
     st.image(image, caption='Uploaded Image.')
+    shape = image.size
     st.write("")
     if st.button('Upscale Now'):
         st.write("upscaling...")
         gen_image1 = resolve_single(generator, np.array(image)).numpy()
-        bicubic = image.resize((image.size[0]), image.size[1]))
+        bicubic = image.resize((shape[0]*4, shape[1]*4))
         st.image(bicubic, caption='Normal upscaled image')
         st.image(gen_image1, caption='Upscaled Image')
