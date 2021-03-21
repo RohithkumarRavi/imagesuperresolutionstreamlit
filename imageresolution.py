@@ -83,6 +83,9 @@ uploaded_file = st.file_uploader("Choose an image...", type=("jpg", "png", "jpeg
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
+    if image.shape[0] > 224 or image.shape[1] > 224:
+        st.write("Image has been downscaled to 224 x 224")
+    image = image.resize((224,224))
     st.image(image, caption='Uploaded Image.')
     st.write("")
     if st.button('Upscale Now'):
